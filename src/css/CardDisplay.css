@@ -1,0 +1,8 @@
+.display-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.dropdown {
+    margin: 0.25rem;
+}
