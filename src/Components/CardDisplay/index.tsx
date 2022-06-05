@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import testFunds from "../../testFunds.json";
 import CardComponent from "./CardComponent";
 import "../../css/CardDisplay.css";
@@ -47,7 +47,16 @@ const prettyFormatString = (str: string): string => {
 
 const CardDisplay: React.FC = () => {
 
-  const [funds, setFunds] = useState<Fund[]>(testFunds);
+  const loadData = () => {
+    // This would be replaced with an API call in a real application
+    setFunds(testFunds);
+  }
+
+  const [funds, setFunds] = useState<Fund[]>([]);
+
+  useEffect(() => {
+    loadData();
+  },[])
 
   return(
     <>
@@ -63,7 +72,7 @@ const CardDisplay: React.FC = () => {
         </Dropdown.Menu>
       </Dropdown>
       <div className={"display-container"}>
-        {funds.map(fund => (
+        {funds && funds.map(fund => (
           <CardComponent key={fund.id} name={fund.name} amount={fund.amount}/>
         ))}
       </div>
